@@ -1,6 +1,6 @@
 import asyncio
 from agents import ItemHelpers, RunConfig, Runner
-from agentic_github.coding_assistant import coding_agent
+from agentic_github.coding_assistant import assistant, coding_agent
 
 async def run_coding_agent_with_logs(prompt: str):
     """
