@@ -1,5 +1,6 @@
 import os
-from agents import Agent, Runner, WebSearchTool
+import asyncio
+from agents import Agent, Runner, WebSearchTool, trace
 from agentic_github.shellmanager import shell_tool
 from agents.mcp import MCPServer, MCPServerStreamableHttp
 
@@ -12,33 +13,9 @@ You can search the web to find which command you should use based on the technic
 You should use github server for creating issues.
 You should also install necessary dependencies for the project to work. 
 '''
+directory_path = 'C:\\Users\\bmoha\\Work\\agentic\\agentic-workspace\\greetings-lib'
+GITHUB_INSTRUCTIONS = f"Answer questions about the git repository at {directory_path}, use that for repo_path",
 
-async def run(github_server: MCPServer):
-    coding_agent = Agent(
-        name="Coding Agent",
-        model="gpt-5.1",
-        instructions=INSTRUCTIONS,
-        tools=[
-            WebSearchTool(),
-            shell_tool
-        ],
-        mcp_servers=[github_server]
-    )
-    return coding_agent
-
-async def assistant():
-    # Ask the user for the directory path
-    #directory_path = input("Please enter the path to the git repository: ")
-
-    async with MCPServerStreamableHttp(
-        name="Streamable Github MCP Server",        
-        params={"url": "https://api.githubcopilot.com/mcp/", 
-                "headers": {
-                    "Authorization": f"Bearer {GITHUB_PAT_KEY}",
-                },
-                },
-    ) as server:
-            await run(server)
 
 
 coding_agent = Agent(
@@ -49,5 +26,4 @@ coding_agent = Agent(
         WebSearchTool(),
         shell_tool
     ],
-        #mcp_servers=[github_server]
     )

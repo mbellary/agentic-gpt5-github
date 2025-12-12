@@ -3,29 +3,35 @@ from pathlib import Path
 
 from agentic_github.runmanager import run_coding_agent_with_logs
 
+github_respository = "https://github.com/mbellary/greetings-lib"
 workspace_dir = Path("C:/Users/bmoha/Work/agentic/agentic-workspace/greetings-lib").resolve()
 workspace_dir.mkdir(exist_ok=True)
-
 print(f"Workspace directory: {workspace_dir}")
 
-github_issues_doc = ""
-github_branch_doc = ""
-
-TASK_LIST_PREFIX = "add a new greet function in greetings.py that takes name of the user and place of the user as inputs and prints a message 'Hello {name} from {place}' "
+TASK_LIST_PREFIX = '''
+    1) add a new greet function in greetings.py that takes name of the user and place of the user as inputs and prints a message 'Hello {name} from {place}' 
+    2) add a new bye function in bye.py that takes name of the user and place of the user as inputs and prints a message 'Bye {name} !!'
+    '''
 
 tpm_instructions = f"""
     Task List:
-    - {TASK_LIST_PREFIX}
+        {TASK_LIST_PREFIX}
 
     You are the Technical Project Manager.
 
     Objective:
     Convert the input task lists into Github artifacts the team will execute against:
 
-    Github Deliverables:
+    Details:
+    - local repository is located at {workspace_dir}
+    - remote repository is located at {github_respository}
+    - you must follow guidelines defined in Agents.md located in the root directory of the local repository for the details.
+
+    Deliverables:
     - For each of the input tasks, please perform the following:
-        - Add one github issue.
-    - please refer to Agents.md located in the root directory of this repository for the details.
+        - Add a github issue.
+        - Add a corresponding branch. you must create a new branch from 'main' always.
+        - you must link the issue to this branch by adding a comment with the branch name in issue.
 """
 
 
