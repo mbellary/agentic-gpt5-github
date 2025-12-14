@@ -52,3 +52,50 @@ When you’re ready, I can also help draft the pull request using the `.github/P
 
 
 You (or another contributor) can now implement the function on this branch and open a PR that links to Issue #64.
+
+
+## 3. Next Steps You (or a Dev) Can Take
+
+On your machine, you can now:
+
+```bash
+git clone https://github.com/mbellary/greetings-lib.git
+cd greetings-lib
+git checkout feature/extended-greet-bye-functions
+# Implement:
+# - new greet(name, place) in greetings.py that prints "Hello {name} from {place}"
+# - new bye(name) in bye.py that returns "Bye {name} !!"
+# - add/update unit tests
+uv run ruff format .
+uv run ruff check . --fix
+uv run pytest --cov
+git commit -am "feat: add extended greet and bye helpers"
+git push -u origin feature/extended-greet-bye-functions
+```
+
+Then open a PR from `feature/extended-greet-bye-functions` to the configured target branch, following `.github/PULL_REQUEST/pull_request.md` (include “Fixes #66”, checklist, etc.).
+
+If you’d like, I can next:
+- Draft the exact `greet(...)` and `bye(...)` implementations and test stubs, or
+- Draft the PR description text following the PR template.
+
+[apply_patch] No apply_patch calls detected in this run.
+(agentic-gpt5-github)
+bmoha@WL-Ali MINGW64 /c/Users/bmoha/Work/agentic/agentic-gpt5-github (main)
+$
+
+
+
+3. **Next steps for implementation (for your reference)**
+   In the `feature/greet-and-bye-helpers` branch, the work should include:
+   - Implement `greet(name: str, place: str)` in `greetings.py`:
+     - Build the string `f"Hello {name} from {place}"`.
+     - Use `print(...)` to output it.
+   - Implement `bye(name: str)` in `bye.py`:
+     - Return `f"Bye {name} !!"` (no printing).
+   - Add/update tests to cover both functions.
+   - Run the workflow from `branch.md`:
+     - `uv run ruff format .`
+     - `uv run ruff check . --fix`
+     - `uv run pytest --cov`
+   - Push the branch and open a PR targeting the appropriate base (per PR template), linking **Issue #67** (e.g., `Fixes #67`) and using `.github/PULL_REQUEST/pull_request.md` as the checklist.

@@ -7,7 +7,8 @@ from agentic_github.runeditmanager import run_updated_coding_agent_with_logs
 
 TASK_LIST_PREFIX = '''
     1) add a new greet function in greetings.py that takes name of the user and place of the user as inputs and prints a message 'Hello {name} from {place}' 
-        
+    2) add a new bye function in bye.py that takes name of the user and return message 'Bye {name} !!'
+    3) add a request that describes or defines the testing guidelines
     '''
 
 

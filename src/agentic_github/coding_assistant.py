@@ -43,12 +43,15 @@ INSTRUCTIONS  = f"""
         
         # Github Artifacts
             - You MUST use remote repository {GITHUB_REPO} for all github artifacts.
-        
+
+            
             
         # Doing Tasks
-        - for each of the user provided tasks, perform the following:
-            - Add github issue using {GITHUB_BUG} or {GITHUB_FEATURE} as the template.
-            - Create branch using {GITHUB_BRANCH} as the template. 
+        - for user provided tasks, you MUST create separate Github artifacts if the tasks are not related or requires sub-tasks.
+        - for each of the user provided task, perform the following:
+            - Always first search if the task exist before adding or updating the github artifacts.
+            - Add github issue using {GITHUB_BUG} or {GITHUB_FEATURE} as the template only if the issue does not exist.
+            - Create branch using {GITHUB_BRANCH} as the template only if the branch does not exist.
             
             VERY IMPORTANT: You MUST use the templates to implement your tasks.
 
