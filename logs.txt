@@ -1,0 +1,54 @@
+Next steps (for the implementation phase, outside this PM role):
+
+1. Create a feature branch following the project’s branch guidelines.
+2. Implement `greet(name: str, place: str) -> None` in `greetings.py` to print `Hello {name} from {place}`.
+3. Add/update tests (likely in `tests/test_greetings.py`).
+4. Run `uv run ruff format .`, `uv run ruff check . --fix`, and `uv run pytest --cov`.
+5. Open a PR following the repo’s PR template and link it to Issue #4
+
+- Create a feature branch following `.github/BRANCH/branch.md`, and
+- Implement the function + tests and then open a PR using `.github/PULL_REQUEST/pull_request.md` as the template.
+
+
+1. Create a feature branch per `.github/BRANCH/branch.md` (something like `feature/add-greet-with-place`).
+2. Implement the `greet(name: str, place: str)` function in `greetings.py`.
+3. Add/extend tests to cover this behavior.
+4. Run formatting, linting, and tests:
+   - `uv run ruff format .`
+   - `uv run ruff check . --fix`
+   - `uv run pytest --cov`
+5. Open a PR linked to Issue #49 using `.github/PULL_REQUEST/pull_request.md` as the template.
+
+
+
+
+3. **Next steps for implementation (for your local workflow)**
+
+   From your local clone of the repo:
+
+   ```bash
+   git fetch origin
+   git checkout feature/add-greet-name-place
+   ```
+
+   In `greetings.py`, add something like:
+
+   ```python
+   def greet(name: str, place: str) -> None:
+       print(f"Hello {name} from {place}")
+   ```
+
+   Then run the documented workflow:
+
+   ```bash
+   uv run ruff format .
+   uv run ruff check . --fix
+   uv run pytest --cov
+   git commit -am "feat: add greet function with name and place"
+   git push -u origin feature/add-greet-name-place
+   ```
+
+When you’re ready, I can also help draft the pull request using the `.github/PULL_REQUEST/pull_request.md` conventions and link it to Issue #63.
+
+
+You (or another contributor) can now implement the function on this branch and open a PR that links to Issue #64.

@@ -1,29 +1,68 @@
 import os
 import asyncio
-from agents import Agent, Runner, WebSearchTool, trace
+from pathlib import Path
+from typing import List
+from agents import Agent, Runner, WebSearchTool
 from agentic_github.shellmanager import shell_tool
-from agents.mcp import MCPServer, MCPServerStreamableHttp
+from agentic_github.apply_patch import apply_patch_tool
+from agentic_github.config import (
+        GITHUB_REPO, 
+        WORKSPACE_DIR,
+        GITHUB_COLAB,
+        GITHUB_BRANCH,
+        GITHUB_FEATURE,
+        GITHUB_BUG,
+        GITHUB_PR
+)
 
-GITHUB_PAT_KEY = os.getenv("GITHUB_PAT")
+WORKSPACE_DIR.mkdir(exist_ok=True)
+print(f"Workspace directory: {WORKSPACE_DIR}")
 
-# Define the agent's instructions
-INSTRUCTIONS = '''
-You are a coding assistant. The user will explain what they want to build, and your goal is to run commands to generate a new app.
-You can search the web to find which command you should use based on the technical stack, and use commands to create code files. 
-You should use github server for creating issues.
-You should also install necessary dependencies for the project to work. 
-'''
-directory_path = 'C:\\Users\\bmoha\\Work\\agentic\\agentic-workspace\\greetings-lib'
-GITHUB_INSTRUCTIONS = f"Answer questions about the git repository at {directory_path}, use that for repo_path",
+# # Define the TodoWrite function as a tool
+# @tool
+# def todo_write(tasks: List[str]) -> str:
+#     """
+#     Write a todo list to help the agent organize its thoughts and track progress.
 
+#     Args:
+#         tasks: A list of task descriptions.
+#     """
+#     # This function is for organizational purposes only and doesn't perform actions.
+#     # It just returns a confirmation string.
+#     return f"Todo list updated with {len(tasks)} tasks."
 
+INSTRUCTIONS  = f"""
+        You are the Program Manager. Your goal is to manage and track the Github artifacts the team will execute against.
+        
+        Use the instructions below and the tools available to you to assist the user.
 
-coding_agent = Agent(
+        When the user provides the tasks, first use the following documentation to gather information.
+            - The available documentation paths are {GITHUB_COLAB}, {GITHUB_BRANCH}, {GITHUB_BUG}, {GITHUB_FEATURE} and {GITHUB_PR} .
+            - You MUST always refer to the provided documentation paths.
+        
+        
+        # Github Artifacts
+            - You MUST use remote repository {GITHUB_REPO} for all github artifacts.
+        
+            
+        # Doing Tasks
+        - for each of the user provided tasks, perform the following:
+            - Add github issue using {GITHUB_BUG} or {GITHUB_FEATURE} as the template.
+            - Create branch using {GITHUB_BRANCH} as the template. 
+            
+            VERY IMPORTANT: You MUST use the templates to implement your tasks.
+
+"""
+
+print(INSTRUCTIONS)
+
+program_manager_agent = Agent(
     name="Coding Agent",
     model="gpt-5.1",
     instructions=INSTRUCTIONS,
     tools=[
         WebSearchTool(),
-        shell_tool
+        shell_tool,
+        apply_patch_tool,
     ],
     )

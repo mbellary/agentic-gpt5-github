@@ -1,7 +1,7 @@
 import asyncio
 import os
 from agents import ItemHelpers, RunConfig, Runner
-from agentic_github.coding_assistant import coding_agent
+from agentic_github.coding_assistant import program_manager_agent
 from agents.mcp import MCPServerStreamableHttp
 
 GITHUB_PAT_KEY = os.getenv("GITHUB_PAT")
@@ -22,9 +22,9 @@ async def run_coding_agent_with_logs(prompt: str):
                 },
     ) as server:
 
-        coding_agent.mcp_servers = [server]
+        program_manager_agent.mcp_servers = [server]
         result = Runner.run_streamed(
-            coding_agent,
+            program_manager_agent,
             input=prompt
         )
 

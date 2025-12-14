@@ -11,11 +11,12 @@ from agents import (
     ShellCallOutcome,
     ShellResult,
 )
+from agentic_github.config import WORKSPACE_DIR
 
-workspace_dir = Path("C:/Users/bmoha/Work/agentic/agentic-workspace/greetings-lib").resolve()
-workspace_dir.mkdir(exist_ok=True)
+# workspace_dir = Path("C:/Users/bmoha/Work/agentic/agentic-workspace/greetings-lib").resolve()
+# workspace_dir.mkdir(exist_ok=True)
 
-print(f"Workspace directory: {workspace_dir}")
+# print(f"Workspace directory: {workspace_dir}")
 
 async def require_approval(commands: Sequence[str]) -> None:
     """
@@ -103,4 +104,4 @@ class ShellExecutor:
         )
 
 
-shell_tool = ShellTool(executor=ShellExecutor(cwd=workspace_dir))
+shell_tool = ShellTool(executor=ShellExecutor(cwd=WORKSPACE_DIR))
