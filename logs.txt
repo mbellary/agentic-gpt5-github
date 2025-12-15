@@ -99,3 +99,6 @@ $
      - `uv run ruff check . --fix`
      - `uv run pytest --cov`
    - Push the branch and open a PR targeting the appropriate base (per PR template), linking **Issue #67** (e.g., `Fixes #67`) and using `.github/PULL_REQUEST/pull_request.md` as the checklist.
+
+
+
