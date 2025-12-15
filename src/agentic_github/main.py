@@ -11,10 +11,6 @@ TASK_LIST_PREFIX = '''
     3) add a request that describes or defines the testing guidelines
     '''
 
-
-#prompt = "please summarize the repository"
-#prompt = "please list the contents of the pyproject.toml file from the repository"
-
 async def run_agent():
     await run_updated_coding_agent_with_logs(TASK_LIST_PREFIX)
 
